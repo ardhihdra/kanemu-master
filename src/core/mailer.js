@@ -2,7 +2,7 @@
 const nodemailer = require("nodemailer");
 
 async function cloudmailin() {
-    let hostname = process.env.CLOUDMAILIN_FORWARD_ADDRESS;
+    let hostname = 'cloudmailin.net';
     let username = process.env.CLOUDMAILIN_USERNAME;
     let password = process.env.CLOUDMAILIN_PASSWORD;
   
