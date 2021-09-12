@@ -2,7 +2,7 @@
 const nodemailer = require("nodemailer");
 
 async function cloudmailin() {
-    let hostname = 'cloudmailin.net';
+    let hostname = 'kanemu-master.herokuapp.com';
     let username = process.env.CLOUDMAILIN_USERNAME;
     let password = process.env.CLOUDMAILIN_PASSWORD;
   
@@ -37,7 +37,7 @@ const testMailer = async function() {
 }
 
 const emailTemplate = (payload) => {
-    let html = `<ul><li>Date : ${new Date().toLocaleDateString()}`
+    let html = `<ul><li>Date : ${new Date().toLocaleDateString()}</li>`
     for(let py in payload) {
         html += `<li>${py} : ${payload[py]}</li>`
     }
