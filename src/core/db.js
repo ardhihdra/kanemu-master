@@ -1,11 +1,19 @@
 const { Client } = require('pg')
-const db = new Client({
-    user: process.env.DBUSER,
-    host: process.env.DBHOST,
-    database: process.env.DB,
-    password: process.env.DBPASS,
-    port: process.env.DBPORT,
-  })
+
+let config = {}
+if(process.env.DATABASE_URL && process.env.DATABASE_URL !== '') {
+    config.connectionString = process.env.DATABASE_URL
+} else {
+    config = {
+        user: process.env.DBUSER,
+        host: process.env.DBHOST,
+        database: process.env.DB,
+        password: process.env.DBPASS,
+        port: process.env.DBPORT,
+    }
+}
+
+const db = new Client(config)
 
 const init = async () => {
     await db.connect()
