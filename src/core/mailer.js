@@ -7,7 +7,7 @@ async function cloudmailin() {
     let password = process.env.CLOUDMAILIN_PASSWORD;
   
     const transporter = await nodemailer.createTransport({
-        host: hostname,
+        // host: hostname,
         port: 587,
         secure: false,
         requireTLS: true,
