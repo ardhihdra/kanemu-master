@@ -37,7 +37,7 @@ const testMailer = async function() {
 }
 
 const emailTemplate = (payload) => {
-    let html = '<ul>'
+    let html = `<ul><li>Date : ${new Date().toLocaleDateString()}`
     for(let py in payload) {
         html += `<li>${py} : ${payload[py]}</li>`
     }
@@ -54,7 +54,7 @@ const send = async function (payload) {
     const info = await transporter.sendMail({
         from: '"Kanemu 🍹"', // sender address 
         to: "ardhi.rofi@gmail.com", // list of receivers
-        subject: "Hello ✔", // Subject line
+        subject: "Order Baru ✔", // Subject line
         text: "Assalamualaikum?", // plain text body
         html: `<b>${emailTemplate(payload)}</b>`, // html body
     });
