@@ -12,7 +12,9 @@ if(process.env.DATABASE_URL && process.env.DATABASE_URL !== '') {
         port: process.env.DBPORT,
     }
 }
-
+config.ssl = {
+    rejectUnauthorized: false
+}
 const db = new Client(config)
 
 const init = async () => {
