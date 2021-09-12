@@ -1,8 +1,16 @@
 "use strict";
 const nodemailer = require("nodemailer");
+const cloudmailin = require("cloudmailin")
 
-async function cloudmailin() {
-    let hostname = process.env.HOST;
+async function cloudMailin() {
+    return new cloudmailin.MessageClient({ 
+        username: process.env.CLOUDMAILIN_USERNAMEAME, 
+        apiKey: process.env.CLOUDMAILIN_PASSWORD
+    });
+}
+
+async function nodeMailer() {
+    let hostname = process.env.CLOUDMAILIN_HOST;
     let username = process.env.CLOUDMAILIN_USERNAME;
     let password = process.env.CLOUDMAILIN_PASSWORD;
   
@@ -49,9 +57,12 @@ const emailTemplate = (payload) => {
 const send = async function (payload) {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
-    const transporter = await cloudmailin();
+    const transporter = await nodeMailer();
+    // const transporter = await cloudMailin();
     // send mail with defined transport object
+
     const info = await transporter.sendMail({
+    // const info = await transporter.sendMessage({
         from: '"Kanemu 🍹"', // sender address 
         to: "ardhi.rofi@gmail.com", // list of receivers
         subject: "Order Baru ✔", // Subject line
