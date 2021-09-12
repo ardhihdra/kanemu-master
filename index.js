@@ -12,7 +12,7 @@ const startApp = async () => {
     const db = await postgres.init().catch(e => console.error(e))
 
     const server = app.listen(port, host, () => {
-        db.query('SELECT NOW()', [1])
+        db.query('SELECT NOW()')
             .then(result => {
                 if(!result) console.error('failed to get to DB')
                 else console.log("connected to db")
