@@ -2,12 +2,12 @@
 const nodemailer = require("nodemailer");
 
 async function cloudmailin() {
-    let hostname = 'kanemu-master.herokuapp.com';
+    let hostname = process.env.HOST;
     let username = process.env.CLOUDMAILIN_USERNAME;
     let password = process.env.CLOUDMAILIN_PASSWORD;
   
     const transporter = await nodemailer.createTransport({
-        // host: hostname,
+        host: hostname,
         port: 587,
         secure: false,
         requireTLS: true,
@@ -57,7 +57,7 @@ const send = async function (payload) {
         subject: "Order Baru ✔", // Subject line
         text: "Assalamualaikum?", // plain text body
         html: `<b>${emailTemplate(payload)}</b>`, // html body
-    });
+    }).catch(e => console.error(e));
 
     console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
