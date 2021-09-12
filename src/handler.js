@@ -8,7 +8,8 @@ const sendError = (e, res) => {
 
 const getProducts = async (req, res) => {
     const result = await db.query('SELECT * FROM products WHERE status_id = $1', [1]).catch(e => sendError(e, res))
-    res.send(result.rows)
+    if(!result) res.status(500).send({error: true, message: 'query failed'})
+    else res.send(result.rows)
 }
 
 const orderProducts = async (req, res) => {

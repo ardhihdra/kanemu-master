@@ -12,6 +12,12 @@ const startApp = async () => {
     const db = await postgres.init().catch(e => console.error(e))
 
     const server = app.listen(port, host, () => {
+        db.query('SELECT NOW()', [1])
+            .then(result => {
+                if(!result) console.error('failed to get to DB')
+                else console.log("connected to db")
+            })
+            .catch(e => console.error(e))
         console.log(`Kanemu listening at http://${host}:${port}`)
     })
 
