@@ -1,19 +1,21 @@
 require('dotenv').config()
-const express = require('express')
-const app = express()
+const host = process.env.HOST
 const port = process.env.PORT
 
+const postgres = require('./src/core/db')
+const { process_handler } = require('./src/core/helper')
+const { initRoute } = require('./src/router/main')
 
-/** master data */
-app.get('/master/produtcs', (req, res) => {
-  res.send('Hello World!')
-})
+const startApp = async () => {
+    /** master data */
+    const app = initRoute()
+    const db = await postgres.init().catch(e => console.error(e))
 
-/** main API */
-app.get('/order', (req, res) => {
-    res.send('Hello World!')
-})
+    const server = app.listen(port, () => {
+        console.log(`Kanemu listening at http://${host}:${port}`)
+    })
 
-app.listen(port, () => {
-  console.log(`Kanemu listening at http://localhost:${port}`)
-})
+    process_handler(server, db)
+}
+
+startApp()
