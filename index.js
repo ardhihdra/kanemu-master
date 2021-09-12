@@ -1,6 +1,6 @@
 require('dotenv').config()
 const host = process.env.HOST
-const port = process.env.PORT
+const port = process.env.PORT || 3001
 
 const postgres = require('./src/core/db')
 const { process_handler } = require('./src/core/helper')
