@@ -3,6 +3,9 @@ const { Client } = require('pg')
 let config = {}
 if(process.env.DATABASE_URL && process.env.DATABASE_URL !== '') {
     config.connectionString = process.env.DATABASE_URL
+    config.ssl = {
+        rejectUnauthorized: false
+    }
 } else {
     config = {
         user: process.env.DBUSER,
@@ -11,9 +14,6 @@ if(process.env.DATABASE_URL && process.env.DATABASE_URL !== '') {
         password: process.env.DBPASS,
         port: process.env.DBPORT,
     }
-}
-config.ssl = {
-    rejectUnauthorized: false
 }
 const db = new Client(config)
 

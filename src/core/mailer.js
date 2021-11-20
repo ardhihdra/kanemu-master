@@ -11,8 +11,8 @@ async function cloudMailin() {
 
 async function nodeMailer() {
     let hostname = process.env.CLOUDMAILIN_HOST;
-    let username = process.env.CLOUDMAILIN_USERNAME;
-    let password = process.env.CLOUDMAILIN_PASSWORD;
+    let username = process.env.ACCOUNT_USERNAME;
+    let password = process.env.ACCOUNT_PASSWORD;
   
     const transporter = await nodemailer.createTransport({
         host: hostname,
@@ -63,10 +63,10 @@ const send = async function (payload) {
 
     const info = await transporter.sendMail({
     // const info = await transporter.sendMessage({
-        from: '"Kanemu 🍹"', // sender address 
+        from: process.env.CLOUDMAILIN_USERNAME, // sender address 
         to: "ardhi.rofi@gmail.com", // list of receivers
         subject: "Order Baru ✔", // Subject line
-        text: "Assalamualaikum?", // plain text body
+        text: "Assalamualaikum Kanemu 🍹", // plain text body
         html: `<b>${emailTemplate(payload)}</b>`, // html body
     }).catch(e => console.error(e));
 
